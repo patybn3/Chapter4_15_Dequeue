@@ -1,13 +1,16 @@
 public class DeQue
 {
     private int[] elements;
-    private int maxSize;
+    private final int MAXSIZE = 100;
     private int numElements;
+    protected int front = 0;
+    protected int rear;
 
-    public DeQue(int maxSize) {
-        this.maxSize = maxSize;
+    public DeQue()
+    {
         numElements = 0;
-        elements = new int[maxSize];
+        elements = new int[MAXSIZE];
+        rear = MAXSIZE - 1;
     }
 
     public boolean isEmpty()
@@ -28,28 +31,99 @@ public class DeQue
         return numElements;
     }
 
-    public void addFront(int value) {
-        for (int i = numElements; i > 0; i--) {
-            elements[i] = elements[i-1];
+    public String toString()
+    {
+        String printData = "";
+
+        if (isEmpty())
+        {
+            System.out.println("Print attempted on empty queue.");
         }
-        elements[0] = value;
-        numElements++;
+        else
+        {
+            //loops from the beginning of the queue to the end
+            for(int i = front; i <= rear; i++)
+            {
+                //set the list to string and print it
+                System.out.print(elements[i] + " ");
+            }
+        }
+        return printData;
     }
 
-    public void addLast(int value) {
-        elements[numElements++] = value;
+    public void addToFront(int value)
+    {
+        int[] tempArr = new int[elements.length+1];
+        System.out.println("\nAdding " + value + " to The Front:");
+
+        if(isFull())
+        {
+            System.out.println("The Queue is Full.");
+        }
+        else
+        {
+            for (int i = 0, j = 0; i < elements.length; i++, j++)
+            {
+                if (i == 0)
+                {
+                    tempArr[j] = value;
+                    j++;
+                }
+                tempArr[j] = elements[i];
+            }
+            rear++;
+            elements = tempArr.clone();
+            numElements++;
+        }
     }
 
-    public int removeFront() {
+    public void addToEnd(int value)
+    {
+        if(isFull())
+        {
+            System.out.println("Queue is Full.");
+        }
+        else
+        {
+            rear = (rear + 1) % elements.length;
+            elements[rear] = value;
+            numElements++;
+        }
+    }
+
+    public int removeFirstElement()
+    {
         int value = elements[0];
-        for (int i = 0; i < numElements-1; i++) {
-            elements[i] = elements[i+1];
+        System.out.println("\nRemoving First Element:");
+
+        if(isEmpty())
+        {
+            System.out.println("Queue is empty.");
+            return 0;
         }
-        numElements--;
-        return value;
+        else
+        {
+            for (int i = 0; i < numElements - 1; i++)
+            {
+                elements[i] = elements[i + 1];
+            }
+            numElements--;
+            rear--;
+            return value;
+        }
     }
 
-    public int removeLast() {
-        return elements[--numElements];
+    public int removeLastElement()
+    {
+        System.out.println("\nRemoving Last Element:");
+
+        if(isEmpty()){
+            System.out.println("Queue is Empty.");
+            return  0;
+        }
+        else {
+            rear--;
+            return elements[--numElements];
+        }
     }
 }
