@@ -1,10 +1,15 @@
+/*this class uses an array to simulate a queue, numbers are added to the array through
+a loop, passed by the main method on file Chapter4_15_PatriciaAntlitz.java.
+This class can print the size and the list of numbers, remove, add from both front and end of the list
+ */
+
 public class DeQue
 {
-    private int[] elements;
-    private final int MAXSIZE = 100;
-    private int numElements;
-    protected int front = 0;
-    protected int rear;
+    private int[] elements;                 // array that holds queue elements
+    private final int MAXSIZE = 100;        // default capacity
+    private int numElements;                // number of elements in this queue
+    protected int front = 0;                // index of front of queue
+    protected int rear;                     // index of rear of queue
 
     public DeQue()
     {
@@ -51,10 +56,12 @@ public class DeQue
         return printData;
     }
 
-    public void addToFront(int value)
+    public void addToFront(int num)
     {
-        int[] tempArr = new int[elements.length+1];
-        System.out.println("\nAdding " + value + " to The Front:");
+        //uses a temporary array to create "a new" one
+        int[] tempArr = new int[elements.length + 1];
+
+        System.out.println("\nAdding " + num + " to The Front:");
 
         if(isFull())
         {
@@ -66,18 +73,23 @@ public class DeQue
             {
                 if (i == 0)
                 {
-                    tempArr[j] = value;
+                    //when index is 0, add the value passed to the 0 position
+                    tempArr[j] = num;
                     j++;
                 }
+                //pass the rest
                 tempArr[j] = elements[i];
             }
+            //move the last item position
             rear++;
+            //copy the temporary array into elements array
             elements = tempArr.clone();
+            //counts size up
             numElements++;
         }
     }
 
-    public void addToEnd(int value)
+    public void addToEnd(int num)
     {
         if(isFull())
         {
@@ -86,14 +98,14 @@ public class DeQue
         else
         {
             rear = (rear + 1) % elements.length;
-            elements[rear] = value;
+            elements[rear] = num;
             numElements++;
         }
     }
 
     public int removeFirstElement()
     {
-        int value = elements[0];
+        int num = elements[0];
         System.out.println("\nRemoving First Element:");
 
         if(isEmpty())
@@ -103,13 +115,15 @@ public class DeQue
         }
         else
         {
-            for (int i = 0; i < numElements - 1; i++)
+            for (int i = 0; i < numElements; i++)
             {
                 elements[i] = elements[i + 1];
             }
+            //size down
             numElements--;
+            //shrink list
             rear--;
-            return value;
+            return num;
         }
     }
 
