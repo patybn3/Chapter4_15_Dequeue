@@ -2,7 +2,6 @@
 a loop, passed by the main method on file Chapter4_15_PatriciaAntlitz.java.
 This class can print the size and the list of numbers, remove, add from both front and end of the list
  */
-
 public class DeQue
 {
     private int[] elements;                 // array that holds queue elements
@@ -16,44 +15,6 @@ public class DeQue
         numElements = 0;
         elements = new int[MAXSIZE];
         rear = MAXSIZE - 1;
-    }
-
-    public boolean isEmpty()
-    // Returns true if this queue is empty; otherwise, returns false.
-    {
-        return (numElements == 0);
-    }
-
-    public boolean isFull()
-    // Returns true if this queue is full; otherwise, returns false.
-    {
-        return (numElements == elements.length);
-    }
-
-    public int size()
-    // Returns the number of elements in this queue.
-    {
-        return numElements;
-    }
-
-    public String toString()
-    {
-        String printData = "";
-
-        if (isEmpty())
-        {
-            System.out.println("Print attempted on empty queue.");
-        }
-        else
-        {
-            //loops from the beginning of the queue to the end
-            for(int i = front; i <= rear; i++)
-            {
-                //set the list to string and print it
-                System.out.print(elements[i] + " ");
-            }
-        }
-        return printData;
     }
 
     public void addToFront(int num)
@@ -139,5 +100,43 @@ public class DeQue
             rear--;
             return elements[--numElements];
         }
+    }
+
+    public boolean isEmpty()
+    // Returns true if this queue is empty; otherwise, returns false.
+    {
+        return (numElements == 0);
+    }
+
+    public boolean isFull()
+    // Returns true if this queue is full; otherwise, returns false.
+    {
+        return (numElements == elements.length);
+    }
+
+    public int size()
+    // Returns the number of elements in this queue.
+    {
+        return numElements;
+    }
+
+    public String toString()
+    {
+        String printData = "";
+
+        if (isEmpty())
+        {
+            System.out.println("Print attempted on empty queue.");
+        }
+        else
+        {
+            //loops from the beginning of the queue to the end
+            for(int i = front; i <= rear; i++)
+            {
+                //set the list to string and print it
+                System.out.print(elements[i] + " ");
+            }
+        }
+        return printData;
     }
 }

@@ -56,7 +56,5 @@ public class Chapter4_15_PatriciaAntlitz
         newList.removeLastElement();
         newList.toString();
         System.out.println("\nQueue Size: " + newList.size());
-
-
     }
 }
